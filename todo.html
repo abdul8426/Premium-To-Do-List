@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Premium To-Do List</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#0f172a,#1e293b,#7c3aed);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:450px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 0 30px rgba(124,58,237,0.5);
+    text-align:center;
+}
+
+h2{
+    color:white;
+    margin-bottom:20px;
+    text-shadow:0 0 15px white;
+}
+
+#input{
+    width:70%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    outline:none;
+    font-size:16px;
+    transition:0.3s;
+}
+
+#input:focus{
+    box-shadow:0 0 20px #38bdf8;
+    transform:scale(1.03);
+}
+
+.add-btn{
+    padding:12px 18px;
+    border:none;
+    border-radius:25px;
+    background:#22c55e;
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+    margin-left:5px;
+}
+
+.add-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 20px #22c55e;
+}
+
+#list-container{
+    list-style:none;
+    margin-top:20px;
+    padding:0;
+}
+
+#list-container li{
+    background:rgba(255,255,255,0.15);
+    color:white;
+    margin:12px 0;
+    padding:12px 15px;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    transition:0.3s;
+}
+
+#list-container li:hover{
+    transform:translateX(5px);
+    box-shadow:0 0 15px rgba(255,255,255,0.3);
+}
+
+.delete-btn{
+    background:#ef4444;
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+    box-shadow:0 0 15px #ef4444;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>✨ MY TODO LIST ✨</h2>
+
+    <input id="input" placeholder="Type your task here">
+    <button onclick="add()" class="add-btn">Add</button>
+
+    <ul id="list-container">
+        <li>
+            Welcome Task
+            <button class="delete-btn" onclick="deleteItem(event)">Delete</button>
+        </li>
+    </ul>
+</div>
+
+<script>
+var ul = document.getElementById("list-container");
+
+function add(){
+    var input = document.getElementById("input");
+
+    if(input.value.trim() === ""){
+        alert("Please enter a task!");
+        return;
+    }
+
+    var listitem = document.createElement("li");
+
+    listitem.innerHTML =
+        input.value +
+        "<button class='delete-btn' onclick='deleteItem(event)'>Delete</button>";
+
+    ul.append(listitem);
+
+    input.value = "";
+}
+
+function deleteItem(event){
+    event.target.parentElement.remove();
+}
+
+document.getElementById("input").addEventListener("keypress", function(event){
+    if(event.key === "Enter"){
+        add();
+    }
+});
+</script>
+
+</body>
+</html>
